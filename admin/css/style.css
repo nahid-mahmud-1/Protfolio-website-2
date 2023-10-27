@@ -1,0 +1,86 @@
+/* Global CSS */
+:root {
+    --admin-main-color: #31506E;
+    --admin-heading-color: #212121;
+    --theme-bg-color: #f9f9f9;
+    --admin-white-color: #ffffff;
+    --admin-black-color: #000000;
+    --admin-text-color-1: #2e2d2d;
+    --admin-text-color-2: #ffffff;
+}
+body{
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Montserrat', sans-serif;
+}
+h1{
+    font-size: 42px;
+}
+h2{
+    font-size: 36px;
+}
+h3{
+    font-size: 28px;
+}
+h4{
+    font-size: 24px;
+}
+h5{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+}
+h6{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+p{
+    color: var(--theme-text-color-1);
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif; 
+}
+a{
+    text-decoration: none;
+}
+.img-fluid{
+    max-width: 100%;
+}
+
+/* Form Global CSS */
+.form-label{
+    display: block;
+    padding: 7px 0px;
+}
+.form-control{
+    width: 100%;
+}
+.option-submit-button{
+    color: var(--admin-white-color);
+    background: var(--admin-main-color);
+    border: 1px solid var(--admin-main-color);
+    padding: 12px 40px;
+    border-radius: 5px;
+}
+
+
+/* Admin CSS */
+.theme-option-section{
+    background: var(--admin-white-color);
+    padding: 50px 0px;
+}
+.option-box{
+    background: var(--theme-bg-color);
+    padding: 20px;
+    border-radius: 10px;
+}
+.option-title{
+    width: 100px;
+    background: var(--admin-main-color);
+    padding: 10px 20px;
+    margin: -20px 0px 0px -20px;
+    border-radius: 10px 0px 10px 0px;
+}
+.option-title h5{
+    color: var(--admin-text-color-2);
+}

@@ -13,8 +13,10 @@
         <link rel="stylesheet" type="text/css" href="css/grid.css">
         <!-- FontAwesome CSS file -->
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+        <!-- Theme CSS Color File -->
+        <link rel="stylesheet" href="admin//includes/color.php">
         <!-- Theme Main CSS File -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.php">
         <title>Portfolio Website</title>
     </head>
     <body>

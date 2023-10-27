@@ -1,19 +1,24 @@
+<?php
+    session_start();
+    header("Content-type: text/css;");
+?>
+
 /* Global CSS */
 :root {
-    --theme-main-color: #31506E;
-    --theme-heading-color: #000;
-    --theme-text-color-1: #656262;
-    --theme-text-color-2: #A3A3A3;
-    --theme-bg-color: #f9f9f9;
-    --theme-button-color: #31506E;
-    --theme-button-hover: #212121;
-    --theme-border-color-1: #eee;
-    --theme-item-box-color: #EEEEEE;
-    --theme-item-box-hover: #ffff;
-    --contact-form-button-color: #eee;
-    --contact-form-button-hover: #eee; 
-    --theme-white: #fff;
-    --theme-black: #212121;
+    --theme-main-color: <?php echo $_SESSION['theme_main_color'];?>;
+    --theme-heading-color: <?php echo $_SESSION['theme_heading_color'];?>;
+    --theme-text-color-1: <?php echo $_SESSION['theme_text_color_1'];?>;
+    --theme-text-color-2: <?php echo $_SESSION['theme_text_color_2']; ?>;
+    --theme-bg-color: <?php echo $_SESSION['theme_bg_color']; ?>;
+    --theme-button-color: <?php echo $_SESSION['theme_button_color'];?>;
+    --theme-button-hover: <?php echo $_SESSION['theme_button_hover'];?>;
+    --theme-border-color-1: <?php echo $_SESSION['theme_button_border_color_1'];?>;
+    --theme-item-box-color: <?php echo $_SESSION['theme_item_box_color'];?>;
+    --theme-item-box-hover: <?php echo $_SESSION['theme_item_box_hover'];?>;
+    --contact-form-button-color: <?php echo $_SESSION['contact_form_button_color'];?>;
+    --contact-form-button-hover: <?php echo $_SESSION['contact_form_button_hover'];?>; 
+    --theme-white: <?php echo $_SESSION['theme_white'];?>;
+    --theme-black: <?php echo $_SESSION['theme_black'];?>;
 }
 body{
     font-size: 16px;

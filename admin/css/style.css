@@ -2,11 +2,14 @@
 :root {
     --admin-main-color: #31506E;
     --admin-heading-color: #212121;
-    --theme-bg-color: #f9f9f9;
+    --admin-bg-color: #f9f9f9;
     --admin-white-color: #ffffff;
     --admin-black-color: #000000;
     --admin-text-color-1: #2e2d2d;
     --admin-text-color-2: #ffffff;
+    --admin-border-color-1: #EEEEEE;
+    --admin-alert-success: #4CD585;
+    --admin-alert-error: #e42f2f;
 }
 body{
     font-size: 16px;
@@ -46,14 +49,40 @@ a{
 .img-fluid{
     max-width: 100%;
 }
+.alert{
+    padding: 10px;
+    border-radius: 5px;
+}
+.alert-success{
+    color: var(--admin-white-color);
+    background: var(--admin-alert-success);
+}
+.alert-error{
+    color: var(--admin-white-color);
+    background: var(--admin-alert-error);
+}
+.info-note{
+    color: var(--admin-text-color-1);
+    font-size: 12px;
+    padding: 10px;
+}
 
 /* Form Global CSS */
+.form-group{
+    margin-bottom: 10px;
+}
 .form-label{
     display: block;
     padding: 7px 0px;
 }
 .form-control{
     width: 100%;
+    padding: 10px;
+    border: 1px solid var(--admin-border-color-1);
+    border-radius: 5px;
+}
+.color-control{
+    height: 55px;
 }
 .option-submit-button{
     color: var(--admin-white-color);
@@ -70,7 +99,7 @@ a{
     padding: 50px 0px;
 }
 .option-box{
-    background: var(--theme-bg-color);
+    background: var(--admin-bg-color);
     padding: 20px;
     border-radius: 10px;
 }

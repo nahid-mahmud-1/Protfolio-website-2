@@ -1,3 +1,19 @@
+<?php 
+    include "admin/includes/db.php";
+
+    // Fetching Color's data
+    $sql = "SELECT * FROM header";
+    $get_query = mysqli_query($db, $sql);
+
+    while($row = mysqli_fetch_assoc($get_query)){
+        $header_logo     = $row['header_logo'];
+        $nav_menu        = $row['nav_menu'];
+        $nav_menu_anchors = $row['nav_menu_anchors'];
+    };
+
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,7 +44,15 @@
                         <div class="logo">
                             <a href="https://nahidmahmud.com/">
                                  <!-- Brand Logo -->
-                                <h2>Nahid</h2>
+                                <?php
+                                    if( !empty($header_logo) ){
+                                        echo "<h2>$header_logo</h2>";
+                                    }
+                                    else{
+                                        echo "<h2>Nahid</h2>";
+                                    }
+                                
+                                ?>
                             </a>
                         </div>
                     </div>
@@ -36,7 +60,19 @@
                         <!-- Nav Menu Start -->
                         <nav>
                             <ul class="nav-menu">
-                                <li>
+                                <?php
+                                    $nav_menu_items = explode(",", $nav_menu);
+                                    $nav_menu_anchors = explode(",", $nav_menu_anchors);
+                                    
+                                    foreach($nav_menu_items as $index => $menu_item){
+                                        ?>
+                                            <li>
+                                                <a href="<?php echo '#' . trim($nav_menu_anchors[$index])?>"><?php echo trim($menu_item); ?></a>
+                                            </li>
+                                        <?php
+                                    } 
+                                ?>
+                                <!-- <li>
                                     <a href="#home">About</a>
                                 </li>
                                 <li>
@@ -50,7 +86,7 @@
                                 </li>
                                 <li>
                                     <a href="#contact">Contact</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                         <!-- Nav Menu End -->

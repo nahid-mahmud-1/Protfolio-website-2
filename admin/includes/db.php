@@ -9,7 +9,7 @@
     $db = mysqli_connect($db_hostname, $db_username, $db_password, $database_name);
 
     if( $db ){
-        echo "Database is connected";
+        // echo "Database is connected";
     }
     else{
         die('Database Connecting Error' . mysqli_error(mysqli_connect($db_name, $db_username, $db_password, $database_name)));

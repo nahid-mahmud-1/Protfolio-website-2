@@ -172,7 +172,8 @@
                                         $update_query = mysqli_query($db, $sql);
 
                                         if($update_query){
-                                            echo "Saved";
+
+                                            header("Location: dashboard.php");
                                         }
                                         else{
                                             echo "Something went wrong, please try again";
@@ -188,7 +189,7 @@
                     </div>
                 </div>
 
-                <!-- Header Content Section Row -->
+                <!-- Header Content Row -->
                 <div class="row">
                     <div class="col-12">
                         <!-- Option Box Start -->
@@ -258,6 +259,110 @@
                                         else{
                                             echo '<div class="alert alert-error">Error, could not able to update.</div>';
                                         }
+                                    }
+                                    
+                                
+                                ?>
+                            </div>
+                            <!-- Option Form End -->
+                        </div>
+                        <!-- Option Box End -->
+                    </div>
+                </div>
+
+                <!-- Intro Content Row -->
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Option Box Start -->
+                        <div class="option-box">
+                            <!-- Option Title -->
+                            <div class="option-title">
+                                <h5>Intro</h5>
+                            </div>
+                            <?php
+
+                                // Fetching Color's data
+                                $sql = "SELECT * FROM intro";
+                                $get_query = mysqli_query($db, $sql);
+
+                                while($row = mysqli_fetch_assoc($get_query)){
+                                    $id                     = $row['id'];
+                                    $person_name            = $row['person_name'];
+                                    $job_title              = $row['job_title'];
+                                    $grettings              = $row['grettings'];
+                                    $hero_title             = $row['hero_title'];
+                                    $hero_description       = $row['hero_description'];
+                                    $hero_button_name       = $row['hero_button_name'];
+                                    // Profile Image
+                                    $profile_image          = $row['profile_image'];
+                                };
+
+                            ?>
+                            <!-- Option Form Start -->
+                            <div class="option-form-box">
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="profile-image" class="form-label">Profile Image</label>
+                                                <input type="file" name="profile_image" id="profile-image" value="" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="person-name" class="form-label">Person Name</label>
+                                                <input type="text" name="person_name" id="person-name" value="<?php echo $person_name;?>" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="job-title" class="form-label">Job Title</label>
+                                                <input type="text" name="job_title" id="job-title" value="<?php echo $job_title;?>" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="grettings" class="form-label">Grettings</label>
+                                                <input type="text" name="grettings" id="grettings" value="<?php echo $grettings;?>" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="hero-title" class="form-label">Hero Title</label>
+                                                <input type="text" name="hero_title" id="hero-title" value="<?php echo $hero_title;?>" class="form-control">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="hero-description" class="form-label">Hero Description</label>
+                                                <textarea name="hero_description" id="hero-description" cols="30" rows="10" class="form-control"><?php echo $hero_description;?></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="hero-button-name" class="form-label">Hero Button Name</label>
+                                                <input type="text" name="hero_button_name" id="hero-button-name" value="<?php echo $hero_button_name;?>" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="row">
+                                        <input type="submit" name="intro-submit-button" id="intro-submit-button" value="Save" class="option-submit-button">
+                                    </div>
+                                </form>
+
+                                <?php
+                                    
+                                    if( isset($_POST['intro-submit-button']) ){
+                                        // variable to store data
+                                        // $header_logo    = $_POST['header_logo'];
+                                        // $nav_menu       = $_POST['nav_menu'];
+                                        
+                                        // $update_sql = "UPDATE header SET header_logo = '$header_logo', nav_menu = '$nav_menu' WHERE id = '$id'";
+                                        // $update_query = mysqli_query($db, $update_sql);
+
+                                        // if($update_query){
+                                        //     echo '<div class="alert alert-success">Saved</div>'; 
+                                        //     header("Location: dashboard.php");
+                                        // }
+                                        // else{
+                                        //     echo '<div class="alert alert-error">Error, could not able to update.</div>';
+                                        // }
                                     }
                                     
                                 

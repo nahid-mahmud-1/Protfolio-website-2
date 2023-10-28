@@ -2,13 +2,21 @@
     include "admin/includes/db.php";
 
     // Fetching Color's data
-    $sql = "SELECT * FROM header";
+    $sql = "SELECT * FROM header, intro";
     $get_query = mysqli_query($db, $sql);
 
     while($row = mysqli_fetch_assoc($get_query)){
+        // Header
         $header_logo     = $row['header_logo'];
         $nav_menu        = $row['nav_menu'];
         $nav_menu_anchors = $row['nav_menu_anchors'];
+        // Intro
+        $person_name            = $row['person_name'];
+        $job_title              = $row['job_title'];
+        $grettings              = $row['grettings'];
+        $hero_title             = $row['hero_title'];
+        $hero_description       = $row['hero_description'];
+        $hero_button_name       = $row['hero_button_name'];
     };
 
     
@@ -108,8 +116,8 @@
                             <div class="profile-img-box">
                                 <img src="images/profile-image-v3.png" class="img-fluid" alt="Profile Image">
                             </div>
-                            <h4 class="profile-title">Nahid Mahmud</h4>
-                            <h6 class="profile-subtitle">Web Developer</h6>
+                            <h4 class="profile-title"><?php echo $person_name; ?></h4>
+                            <h6 class="profile-subtitle"><?php echo $job_title; ?></h6>
                             <!-- Profile Social Icons -->
                             <ul class="profile-social-icons">
                                 <li>
@@ -134,11 +142,11 @@
                             <div class="col-11 col-xm-12 col-sm-12">
                                 <!-- Intro Content -->
                                 <div class="intro-content">
-                                    <h6 class="intro-top-title">Hi there,</h6>
-                                    <h1 class="intro-main-title">I'm a Web Developer</h1>
-                                    <p>Certified web designer and developer with a strong foundation in Web Design andDevelopment. Proficient in HTML5, CSS3, Bootstrap, JavaScript, PHP, and WordPress, Iam dedicated to creating effective web solutions. With 2 years of freelance experience and over 200 completed projects, I am passionate about delivering high-quality work.</p>
+                                    <h6 class="intro-top-title"><?php echo $grettings; ?></h6>
+                                    <h1 class="intro-main-title"><?php echo $hero_title; ?></h1>
+                                    <p><?php echo $hero_description; ?></p>
                                     <!-- Intro button -->
-                                    <a href="#" class="intro-button">Download CV</a>
+                                    <a href="#" class="intro-button"><?php echo $hero_button_name; ?></a>
                                 </div>
                             </div>
                         </div>

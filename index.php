@@ -17,6 +17,7 @@
         $hero_title             = $row['hero_title'];
         $hero_description       = $row['hero_description'];
         $hero_button_name       = $row['hero_button_name'];
+        $profile_image          = $row['profile_image'];
     };
 
     
@@ -106,7 +107,7 @@
 
 
         <!-- Intro Section Start -->
-        <section id="home">
+        <section id="about">
             <div class="container">
                 <!-- Row Start -->
                 <div class="row intro-section section-layout">
@@ -114,7 +115,16 @@
                         <!-- Profile -->
                         <div class="profile-card">
                             <div class="profile-img-box">
-                                <img src="images/profile-image-v3.png" class="img-fluid" alt="Profile Image">
+                                <?php
+                                    if( !empty($profile_image) ){
+                                        ?>
+                                            <img src="images/<?php echo $profile_image;?>" class="img-fluid" alt="Profile Image">
+                                        <?php
+                                    }
+                                    else{
+                                        echo '<img src="images/profile-image-v3.png" class="img-fluid" alt="Profile Image">';
+                                    }
+                                ?>
                             </div>
                             <h4 class="profile-title"><?php echo $person_name; ?></h4>
                             <h6 class="profile-subtitle"><?php echo $job_title; ?></h6>

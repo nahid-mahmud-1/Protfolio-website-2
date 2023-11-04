@@ -1,6 +1,29 @@
 <?php
+    session_start();
+
     include "includes/db.php";
     ob_start();
+
+    // Getting Login Data From The Database
+    $sql = "SELECT * FROM users";
+    $fetch_query = mysqli_query($db, $sql);
+
+    while($row = mysqli_fetch_array($fetch_query)){
+        $valid_user_name        = $row['user_name'];
+        $valid_user_email       = $row['user_email'];
+        $valid_user_password    = $row['user_password'];
+        $valid_user_profile     = $row['user_profile'];
+    }
+
+    if( $_SESSION['user_email'] !== $valid_user_email ){
+
+        session_unset();
+        session_destroy();
+
+        // Redirect to login page
+        header("Location: index.php");
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +45,58 @@
         <title>Admin Dashboard</title>
     </head>
     <body>
+        <!-- Header Section Start -->
+        <section class="admin-header-section">
+            <div class="container">
+                <div class="row admin-content">
+                    <div class="col-10">
+                        <div class="admin-logo">
+                            <h2>Dashboard</h2>
+                        </div>  
+                    </div>
+
+                    <div class="col-2">
+                        <div class="user-profile-box">
+                            <div class="profile">
+                                <?php
+                                    if($valid_user_profile){
+                                        ?>
+
+                                        <!-- Profile Image -->
+                                        <img src="img/<?php echo $valid_user_profile;?>" alt="Profile Image" class="profile-image" class="img-fluid">
+
+                                        <?php
+                                    }
+                                    else{
+                                        ?>
+                                        <!-- Profile Image -->
+                                        <img src="img/admin-profile-image-v1.png" alt="Profile Image" class="profile-image" class="img-fluid">
+                                        <?php
+                                    }
+                                
+                                ?>
+                                
+                                <!-- Profile Details -->
+                                <div class="profile-details">
+                                    <!-- username -->
+                                    <h5 class="user-name"><strong style="font-weight: 500;">Name:</strong> <?php echo $valid_user_name?></h5>
+                                    <!-- email -->
+                                    <h5 class="user-email"><strong style="font-weight: 500;">Email:</strong> <?php echo $valid_user_email?></h5>
+                                    <!-- Logout -->
+                                    <div class="logout-box">
+                                        <a href="logout.php"><i class="fa fa-user"></i>Logout</a>
+                                    </div>
+                                </div>                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Header Section End -->
+
+
+        <!-- Header Section End -->
         <!-- Theme Option Section Start -->
         <section class="theme-option-section">
             <div class="container">
@@ -286,7 +361,7 @@
                                 $get_query = mysqli_query($db, $sql);
 
                                 while($row = mysqli_fetch_assoc($get_query)){
-                                    $id                     = $row['id'];
+                                    $intro_id               = $row['id'];
                                     $person_name            = $row['person_name'];
                                     $job_title              = $row['job_title'];
                                     $grettings              = $row['grettings'];
@@ -294,7 +369,7 @@
                                     $hero_description       = $row['hero_description'];
                                     $hero_button_name       = $row['hero_button_name'];
                                     // Profile Image
-                                    $profile_image          = $row['profile_image'];
+                                    $server_profile_image   = $row['profile_image'];
                                 };
 
                             ?>
@@ -350,8 +425,83 @@
                                     
                                     if( isset($_POST['intro-submit-button']) ){
                                         // variable to store data
-                                        // $header_logo    = $_POST['header_logo'];
-                                        // $nav_menu       = $_POST['nav_menu'];
+                                        $person_name        = mysqli_real_escape_string($db, $_POST['person_name']);
+                                        $job_title          = mysqli_real_escape_string($db, $_POST['job_title']);
+                                        $grettings          = mysqli_real_escape_string($db, $_POST['grettings']);
+                                        $hero_title         = mysqli_real_escape_string($db, $_POST['hero_title']);
+                                        $hero_description   = mysqli_real_escape_string($db, $_POST['hero_description']);
+                                        $hero_button_name   = mysqli_real_escape_string($db, $_POST['hero_button_name']);
+                                        // Profile Image
+                                        $profile_image_name             = mysqli_real_escape_string($db, $_FILES['profile_image']['name']);
+                                        $profile_image_size             = mysqli_real_escape_string($db, $_FILES['profile_image']['size']);
+                                        $profile_image_init_ext         = explode(".", $profile_image_name);
+                                        $profile_image_ext              = strtolower(end($profile_image_init_ext));
+                                        $allowed_image_ext              = ['jpg', 'jpeg', 'png'];
+                                        // tmp path
+                                        $profile_image_tmp              =$_FILES['profile_image']['tmp_name'];
+
+                                        if( !empty($profile_image_name) ){
+
+                                            if( in_array($profile_image_ext, $allowed_image_ext) ){
+
+                                                if( $profile_image_size > 1048576 ){
+                                                    echo '<div class="alert alert-error">This image is too large, pleause use a compressed image.</div>';
+                                                }
+                                                else{
+    
+                                                    $profile_image = rand(1, 999999999) ."-" . date('d-m-Y') . "-" . $profile_image_name;
+                                                    echo $profile_image;
+    
+                                                    $image_uploaded = move_uploaded_file($profile_image_tmp, "../images/$profile_image");
+    
+                                                    if($image_uploaded){
+                                                        
+                                                        unlink("../images/$server_profile_image");
+
+                                                        // SQL To Update Intro Data
+                                                        $update_sql = "UPDATE intro SET person_name = '$person_name', job_title = '$job_title', grettings = '$grettings', hero_title = '$hero_title', hero_description = '$hero_description', hero_button_name = '$hero_button_name', profile_image = '$profile_image' WHERE id = '$intro_id'";
+    
+                                                        $update_query = mysqli_query($db, $update_sql);
+
+                                                        if($update_query){
+                                                            echo '<div class="alert alert-success">Saved</div>';
+                                                            header("Location : dashboard.php");
+                                                        }
+                                                        else{
+                                                            echo '<div class="alert alert-success">Something went wrong!.</div>';
+                                                        }
+                                                
+    
+                                                    }
+                                                    
+                                                }
+    
+                                            }
+                                            else{
+                                                echo '<div class="alert alert-error">Sorry, this type of file is not allowed.</div>';
+                                            }
+                                        }
+                                        else{
+
+                                            // SQL To Update Intro Data
+                                            $update_sql = "UPDATE intro SET person_name = '$person_name', job_title = '$job_title', grettings = '$grettings', hero_title = '$hero_title', hero_description = '$hero_description', hero_button_name = '$hero_button_name' WHERE id = '$intro_id'";
+    
+                                            $update_query = mysqli_query($db, $update_sql);
+
+                                            if($update_query){
+                                            echo '<div class="alert alert-success">Saved</div>';
+                                            header("Location: dashboard.php");
+                                            }
+                                            else{
+                                            echo '<div class="alert alert-success">Something went wrong!.</div>';
+                                            }
+
+                                        }
+                                        
+                                        
+                                        
+                                        
+
                                         
                                         // $update_sql = "UPDATE header SET header_logo = '$header_logo', nav_menu = '$nav_menu' WHERE id = '$id'";
                                         // $update_query = mysqli_query($db, $update_sql);

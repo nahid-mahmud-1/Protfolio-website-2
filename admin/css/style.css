@@ -5,11 +5,16 @@
     --admin-bg-color: #f9f9f9;
     --admin-white-color: #ffffff;
     --admin-black-color: #000000;
+    --admin-black-color-2: #212121;
     --admin-text-color-1: #2e2d2d;
     --admin-text-color-2: #ffffff;
     --admin-border-color-1: #EEEEEE;
     --admin-alert-success: #4CD585;
     --admin-alert-error: #e42f2f;
+    --admin-login-button: #ffffff;
+    --admin-login-button-bg: #212121;
+    --admin-login-button-hover: #212121;
+    --admin-login-button-bg-hover: #f9f9f9;
 }
 body{
     font-size: 16px;
@@ -94,6 +99,64 @@ a{
 
 
 /* Admin CSS */
+/* Admin Header Section */
+.admin-header-section{
+    background: var(--admin-white-color);
+}
+.admin-content{
+    background: var(--admin-bg-color);
+    padding: 5px 10px;
+    align-items: center;
+}
+.admin-content .admin-logo h2{
+    font-size: 25px;
+    font-weight: 700;
+    align-items: center;
+}
+.user-profile-box{
+    position: relative;
+    text-align: right;
+}
+.profile{
+    text-align: right;
+    position: relative;
+    display: inline-block;
+    right: 0;
+}
+.profile img{
+    width: 70px;
+    border: 3px solid #eeee;
+    border-radius: 100%;
+    padding: 3px;
+    cursor: pointer;
+}
+.profile-details{
+    width: 350px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 5px 30px #21212121;
+    line-height: 30px;
+    position: absolute;
+    right: 0;
+    display: none;
+}
+.logout-box{
+    
+}
+.profile:hover .profile-details{
+    display: block;
+}
+.profile-details .user-name{
+    color: var(--admin-text-color-1);
+    font-size: 16px;
+}
+.profile-details .user-email{
+    color: var(--admin-text-color-1);
+    font-size: 16px;
+}
+
 .theme-option-section{
     background: var(--admin-white-color);
     padding: 50px 0px;
@@ -112,4 +175,39 @@ a{
 }
 .option-title h5{
     color: var(--admin-text-color-2);
+}
+
+
+/* Login Form CSS */
+.login-section{
+    background: var(--admin-bg-color);
+}
+.login-section .row{
+    height: 100vh;
+    align-items: center;
+}
+.login-form{
+    padding: 45px 35px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    background: var(--admin-white-color);
+}
+.login-form-logo{
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 35px;
+}
+.admin-login-button{
+    color: var(--admin-login-button);
+    font-size: 16px;
+    background: var(--admin-login-button-bg);
+    padding: 12px 10px;
+    letter-spacing: 0.5px;
+    margin-top: 15px;
+    transition: 0.3s ease-in-out;
+}
+.admin-login-button:hover{
+    color: var(--admin-login-button-hover);
+    background: var(--admin-login-button-bg-hover);
+    cursor: pointer;
 }
